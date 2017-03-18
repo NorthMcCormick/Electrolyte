@@ -1,0 +1,11 @@
+{
+  "name": "electrolyte",
+  "version": "0.0.1",
+  "description": "A simple cli to help install Electron-cordova plugin shims",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "North McCormick <northmccormick@icloud.com> (http://northmccormick.com)",
+  "license": "ISC"
+}
