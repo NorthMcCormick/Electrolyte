@@ -12,6 +12,8 @@ Here's what is coming up
 
 - Continue adding more plugins
 - Create a CLI that will automatically install dependencies and update the scripts
+- Minifications
+- Create-your-own-bundle tool
 
 ### How to (Manual)
 
@@ -20,3 +22,15 @@ Here's what is coming up
 ### How to (Automatic)
 
 Coming one day
+
+### With Ionic Native
+
+The end goal with these shims is to allow any ionic app to be easily ported over for desktop use with minimal code changes. Obviously not all plugins can be ported but the hope is things like notifications, device info, geolocation, etc, can be used without any code modification on the desktop side. 
+
+### For contributors
+
+PRs are welcome! If you are contributing please keep in mind the following:
+
+If you are creating a shim for a plugin be sure to follow the correct readme format and include full installation instructions. Shims *must* line up with the cordova interface. If the cordova plugin is using `window.device`, your shim must also bind to `window.device`. 
+
+If creating additional functionality consider creating an entirely new plugin to keep the mobile-compatible shims more aligned with their cordova plugin methods. 

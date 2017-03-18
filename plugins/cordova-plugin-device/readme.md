@@ -8,7 +8,7 @@ Navigate to your `src` directory and run `ionic plugin install cordova-plugin-de
 
 ##### Shim Install
 
-Copy the `cordova-plugin-electrolyte.js` file into your `src/assets/electron` directory
+Copy the `cordova-plugin-electrolyte.js` file into your `src/assets/electrolyte` directory
 
 Load the script in your `src/index.html` like so: 
 
