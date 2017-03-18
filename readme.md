@@ -6,7 +6,7 @@ The bridge between Cordova phonegap and Electron
 
 **Look ma, same codebase!**
 
-<img src="https://github.com/northmccormick/electrolyte/blob/master/assets/device-desktop.png" width="62%" height="auto" style="display: inline-block;"/><img src="https://github.com/northmccormick/electrolyte/blob/master/assets/device-iphone.png" width="27%" height="auto"  style="display: inline-block;"/>
+<img src="https://github.com/northmccormick/electrolyte/blob/master/assets/device-desktop.png" width="70%" height="auto" style="display: inline-block;"/><img src="https://github.com/northmccormick/electrolyte/blob/master/assets/device-iphone.png" width="30%" height="auto"  style="display: inline-block;"/>
 
 ### Goals
 
