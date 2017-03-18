@@ -4,12 +4,11 @@ The bridge between Cordova phonegap and Electron
 
 A light weight wrapper for Firebase Queue to give you a slightly opinionated but fast way to use the queue.
 
-<img src="http://northmccormick.com/wp-content/uploads/2017/01/build-with-love@2x.png" width="164" height="auto" />
+<img src="http://www.northmccormick.com/content/images/2017/02/build-with-love@2x.png" height="20">
 
 Look ma, same codebase!
 
-<img src="https://github.com/northmccormick/electrolyte/blob/master/assets/device-desktop.png" width="65%" height="auto" style="display: inline-block;"/>
-<img src="https://github.com/northmccormick/electrolyte/blob/master/assets/device-iphone.png" width="30%" height="auto"  style="display: inline-block;"/>
+<img src="https://github.com/northmccormick/electrolyte/blob/master/assets/device-desktop.png" width="65%" height="auto" style="display: inline-block;"/><img src="https://github.com/northmccormick/electrolyte/blob/master/assets/device-iphone.png" width="30%" height="auto"  style="display: inline-block;"/>
 
 # ![Device Desktop](https://github.com/northmccormick/electrolyte/blob/master/assets/device-desktop.png)
 
