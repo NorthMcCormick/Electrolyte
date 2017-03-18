@@ -2,6 +2,19 @@
 
 The bridge between Cordova phonegap and Electron
 
+A light weight wrapper for Firebase Queue to give you a slightly opinionated but fast way to use the queue.
+
+<img src="http://northmccormick.com/wp-content/uploads/2017/01/build-with-love@2x.png" width="164" height="auto" />
+
+Look ma, same codebase!
+
+<img src="https://github.com/northmccormick/electrolyte/blob/master/assets/device-desktop.png" width="65%" height="auto" />
+<img src="https://github.com/northmccormick/electrolyte/blob/master/assets/device-iphone.png" width="30%" height="auto" />
+
+# ![Device Desktop](https://github.com/northmccormick/electrolyte/blob/master/assets/device-desktop.png)
+
+# ![Device iPhone](https://github.com/northmccormick/electrolyte/blob/master/assets/device-iphone.png)
+
 ### Goals
 
 Electrolyte's focus is to bridge the gap between Cordova and Electron. Plugin shims allow developers to continue to share a single codebase for not only mobile platforms, but now desktop platforms too. Each shim is modeled as close as possible to its cordova plugin interface. 
