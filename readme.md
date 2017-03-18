@@ -8,8 +8,8 @@ A light weight wrapper for Firebase Queue to give you a slightly opinionated but
 
 Look ma, same codebase!
 
-<img src="https://github.com/northmccormick/electrolyte/blob/master/assets/device-desktop.png" width="65%" height="auto" />
-<img src="https://github.com/northmccormick/electrolyte/blob/master/assets/device-iphone.png" width="30%" height="auto" />
+<img src="https://github.com/northmccormick/electrolyte/blob/master/assets/device-desktop.png" width="65%" height="auto" style="display: inline-block;"/>
+<img src="https://github.com/northmccormick/electrolyte/blob/master/assets/device-iphone.png" width="30%" height="auto"  style="display: inline-block;"/>
 
 # ![Device Desktop](https://github.com/northmccormick/electrolyte/blob/master/assets/device-desktop.png)
 
