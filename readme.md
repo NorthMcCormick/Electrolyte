@@ -21,13 +21,14 @@ Here's what is coming up
 - Minifications
 - Create-your-own-bundle tool
 
-### How to (Manual)
+### How to use
+
+1. Clone or `npm install --save-dev electrolyte` so you can access the shims. 
+2. Follow the installation instructions for each supported plugin. Some plugins require additional node modules to be installed or require additional configuration steps.
+
+### Plugins
 
 [Device (cordova-plugin-device)](plugins/cordova-plugin-device/readme.md)
-
-### How to (Automatic)
-
-Coming one day
 
 ### With Ionic Native
 
