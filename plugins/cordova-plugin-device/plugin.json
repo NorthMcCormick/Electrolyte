@@ -1,0 +1,5 @@
+{
+  "name": "Device",
+  "bundle": "cordova-plugin-device",
+  "dependencies": ["platform"]
+}

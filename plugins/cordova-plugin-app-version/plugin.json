@@ -1,0 +1,5 @@
+{
+  "name": "App Version",
+  "bundle": "cordova-plugin-app-version",
+  "dependencies": []
+}
