@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
-const fs = require('fs-extra');
-const path = require('path');
+const fs        = require('fs-extra');
+const path      = require('path');
+const npm       = require("npm");
+const exec      = require('child_process').exec;
 
 var myArgs = process.argv.slice(2);
 
@@ -23,6 +25,28 @@ switch(myArgs[0]) {
 
     if(myArgs[1] !== undefined) {
       console.log('Installing plugin shim for ' + myArgs[1]);
+
+      if(fs.existsSync(__dirname + '/plugins/' + myArgs[1] + '/plugin.json')) {
+        var pluginDetails = fs.readJsonSync(__dirname + '/plugins/' + myArgs[1] + '/plugin.json');
+
+        var workingDir = process.cwd();
+        
+        var installDeps = exec('cd ' + workingDir + ' && npm install --save ' + pluginDetails.dependencies.join(' '));
+
+        installDeps.stdout.on('data', function(data){
+          console.log(data);
+        });
+
+        installDeps.stderr.on('data', function(data){
+          console.log(data);
+        });
+
+
+
+      }else{
+        console.log('No shims available for the plugin "' + myArgs[1] + '". Consider requesting a shim in the repo.');
+      }
+
     }else{
       invalidArguments();
     }
