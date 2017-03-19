@@ -21,10 +21,25 @@ Here's what is coming up
 - Minifications
 - Create-your-own-bundle tool
 
-### How to use
+### How to use (Manual)
 
 1. Clone or `npm install --save-dev electrolyte` so you can access the shims. 
 2. Follow the installation instructions for each supported plugin. Some plugins require additional node modules to be installed or require additional configuration steps.
+
+### How to use (Automated, but in beta)
+
+1. Install electrolyte globally `npm install -g electrolyte`
+2. Make sure you are in the root of your Polyonic project. Initialize Electrolyte with `electrolyte init`
+3. Install plugins with `electrolyte install cordova-plugin-device`, if Electrolyte has a shim, it will install it.
+4. Add our onload script to `cordova.js` (example below)
+5. You need to load the `electrolyte.js` and your plugin js under the `cordova.js` in your `index.html` like so:
+
+```html
+  <script src="cordova.js" onload="javascript:window.isCordovaApp = true;"></script>
+  <script src="assets/electrolyte/electrolyte.js"></script>
+  <script src="assets/electrolyte/cordova-plugin-device.js"></script>
+  <script src="assets/electrolyte/cordova-plugin-app-version.js"></script>
+```
 
 ### Plugins
 
