@@ -1,14 +1,65 @@
 #!/usr/bin/env node
 
-var program = require('commander');
+const fs = require('fs-extra');
+const path = require('path');
 
-program
-  //.arguments('<file>')
-  //.option('-u, --username <username>', 'The user to authenticate as')
-  //.option('-p, --password <password>', 'The user\'s password')
-  //.action(function(file) {
-  //  console.log('user: %s pass: %s file: %s', program.username, program.password, file);
-  //})
-  .version('0.0.1')
-  .command('install <plugin-name>', 'Install a cordova plugin shim')
-  .parse(process.argv);
+var myArgs = process.argv.slice(2);
+
+function invalidArguments() {
+  console.log('The arguments you entered (or didn\'t are invalid');
+}
+
+function getDirectories (srcpath) {
+  return fs.readdirSync(srcpath)
+    .filter(file => fs.statSync(path.join(srcpath, file)).isDirectory())
+}
+
+switch(myArgs[0]) {
+  case 'install': // Install a plugin shim
+    /**
+     * Arguments:
+     * 1 - plugin name
+     */
+
+    if(myArgs[1] !== undefined) {
+      console.log('Installing plugin shim for ' + myArgs[1]);
+    }else{
+      invalidArguments();
+    }
+  break;
+
+  case 'list': // List available plugin shims
+    console.log('AVAILABLE PLUGINS');
+
+    var hyphenMax = 30;
+
+    var pluginDirs = getDirectories('plugins');
+
+    var plugins = [];
+
+    pluginDirs.forEach(function(dir) {
+      var pluginInfo = fs.readJSONSync('./plugins/' + dir + '/plugin.json');
+
+      plugins.push({
+        name: pluginInfo.name,
+        bundle: pluginInfo.bundle
+      });
+    });
+
+    plugins.forEach(function(plugin) {
+
+      var hyphens = '';
+
+      for(var i = 0; i <= (hyphenMax - plugin.bundle.length); i++) {
+        hyphens += '-';
+      }
+
+      console.log('[' + plugin.bundle + '] ' + hyphens + ' ' + plugin.name);
+    });
+
+  break;
+
+  default:
+  
+  break;
+}
