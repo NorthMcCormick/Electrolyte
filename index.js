@@ -36,6 +36,36 @@ function installDeps(deps) {
 }
 
 switch(myArgs[0]) {
+
+  case 'init': // Create your electrolyte.json and copy some other stuff over
+    console.log('Initializing your project');
+    
+    var workingDir = process.cwd();
+
+    var electrolytePath = workingDir + '/src/src/assets/electrolyte/electrolyte.js';
+    var electrolyteSourcePath = __dirname + '/templates/electrolyte.js';
+
+    if(!fs.existsSync(workingDir + '/src/src/assets/electrolyte/')) {
+      console.log('No electrolyte directory, creating now');
+      fs.mkdirSync(workingDir + '/src/src/assets/electrolyte/');
+    }
+
+    if(!fs.existsSync(electrolytePath)) {
+      console.log('Electrolyte device-ready shim not present, creating now');
+      fs.copySync(electrolyteSourcePath, electrolytePath);
+    }
+
+    if(!fs.existsSync(workingDir + '/electrolyte.json')) {
+      console.log('Missing electrolyte.json, creating now');
+      var blank = {
+        plugins: []
+      };
+
+      fs.writeJSONSync(workingDir + '/electrolyte.json', blank);
+    }
+    
+  break;
+
   case 'install': // Install a plugin shim
     /**
      * Arguments:
