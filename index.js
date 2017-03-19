@@ -17,6 +17,24 @@ function getDirectories (srcpath) {
     .filter(file => fs.statSync(path.join(srcpath, file)).isDirectory())
 }
 
+function installDeps(deps) {
+  return new Promise(function(resolve, reject) {
+    var workingDir = process.cwd();
+
+    var installDeps = exec('cd ' + workingDir + ' && npm install --save ' + deps.join(' '), {}, function() {
+      resolve();
+    });
+
+    installDeps.stdout.on('data', function(data){
+      console.log(data);
+    });
+
+    installDeps.stderr.on('data', function(data){
+      console.log(data);
+    });
+  });
+}
+
 switch(myArgs[0]) {
   case 'install': // Install a plugin shim
     /**
@@ -32,16 +50,30 @@ switch(myArgs[0]) {
 
         var workingDir = process.cwd();
 
-        var installDeps = exec('cd ' + workingDir + ' && npm install --save ' + pluginDetails.dependencies.join(' '));
+        installDeps(pluginDetails.dependencies).then(function() {
+          console.log('Dependencies installed! Copying other files...');
 
-        installDeps.stdout.on('data', function(data){
-          console.log(data);
+          var electrolytePath = workingDir + '/src/src/assets/electrolyte/electrolyte.js';
+          var electrolyteSourcePath = __dirname + '/templates/electrolyte.js';
+          var shimPath = workingDir + '/src/src/assets/electrolyte/' + pluginDetails.bundle + '.js';
+          var shimSourcePath = __dirname + '/plugins/' + pluginDetails.bundle + '/'  + pluginDetails.bundle + '.js';
+
+          if(!fs.existsSync(workingDir + '/src/src/assets/electrolyte/')) {
+            fs.mkdirSync(workingDir + '/src/src/assets/electrolyte/');
+          }
+
+          if(!fs.existsSync(electrolytePath)) {
+            fs.copySync(electrolyteSourcePath, electrolytePath);
+          }
+
+          if(fs.existsSync(shimPath)) {
+            fs.removeSync(shimPath);
+          }
+
+
+
+          fs.copySync(shimSourcePath, shimPath);
         });
-
-        installDeps.stderr.on('data', function(data){
-          console.log(data);
-        });
-
 
 
       }else{
