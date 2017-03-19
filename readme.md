@@ -30,16 +30,25 @@ Here's what is coming up
 
 1. Install electrolyte globally `npm install -g electrolyte`
 2. Make sure you are in the root of your Polyonic project. Initialize Electrolyte with `electrolyte init`
-3. Install plugins with `electrolyte install cordova-plugin-device`, if Electrolyte has a shim, it will install it.
-4. Add our onload script to `cordova.js` (example below)
-5. You need to load the `electrolyte.js` and your plugin js under the `cordova.js` in your `index.html` like so:
+3. Update your index.html so that Electrolyte can automatically include the scripts for you:
+
+*On Load*
+
+Update the cordova.js tag to look like this:
 
 ```html
-  <script src="cordova.js" onload="javascript:window.isCordovaApp = true;"></script>
-  <script src="assets/electrolyte/electrolyte.js"></script>
-  <script src="assets/electrolyte/cordova-plugin-device.js"></script>
-  <script src="assets/electrolyte/cordova-plugin-app-version.js"></script>
+<script src="cordova.js" onload="javascript:window.isCordovaApp = true;"></script>
 ```
+
+Add these comments after so that Electrolyte knows where to put the scripts, like so:
+
+```html
+<script src="cordova.js" onload="javascript:window.isCordovaApp = true;"></script>
+<!--electrolyte:begin-->
+<!--electrolyte:end-->
+```
+
+4. Install plugins with `electrolyte install cordova-plugin-device`, if Electrolyte has a shim, it will install it.
 
 ### Plugins
 
