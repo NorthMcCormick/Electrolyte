@@ -12,6 +12,7 @@ function invalidArguments() {
 }
 
 function getDirectories (srcpath) {
+  console.log('Getting directories in: ' + srcpath);
   return fs.readdirSync(srcpath)
     .filter(file => fs.statSync(path.join(srcpath, file)).isDirectory())
 }
@@ -30,7 +31,7 @@ switch(myArgs[0]) {
         var pluginDetails = fs.readJsonSync(__dirname + '/plugins/' + myArgs[1] + '/plugin.json');
 
         var workingDir = process.cwd();
-        
+
         var installDeps = exec('cd ' + workingDir + ' && npm install --save ' + pluginDetails.dependencies.join(' '));
 
         installDeps.stdout.on('data', function(data){
@@ -57,12 +58,12 @@ switch(myArgs[0]) {
 
     var hyphenMax = 30;
 
-    var pluginDirs = getDirectories('plugins');
+    var pluginDirs = getDirectories(__dirname + '/plugins');
 
     var plugins = [];
 
     pluginDirs.forEach(function(dir) {
-      var pluginInfo = fs.readJSONSync('./plugins/' + dir + '/plugin.json');
+      var pluginInfo = fs.readJSONSync(__dirname + '/plugins/' + dir + '/plugin.json');
 
       plugins.push({
         name: pluginInfo.name,
