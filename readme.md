@@ -63,7 +63,7 @@ Add these comments after so that Electrolyte knows where to put the scripts, lik
 
 This will install all the plugins listed in the `electrolyte.json`. Great for restoring the shims after a fresh clone or copy.
 
-#### electrolyte install <plugin-bundle-name>
+#### electrolyte install [plugin-bundle-name]
 
 This will install a plugin and update your `electrolyte.json`. If a plugin doesn't have a shim yet the call will fail with the information. Note: github urls are not yet supported.
 
