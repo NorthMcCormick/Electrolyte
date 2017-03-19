@@ -35,6 +35,25 @@ function installDeps(deps) {
   });
 }
 
+function updateIndex() {
+  var re = /\<\!\-\-electrolyte:begin\-\-\>((.|[\n|\r|\r\n])*?)\<\!\-\-electrolyte:end\-\-\>[\n|\r|\r\n]?(\s+)?/g;
+
+  var workingDir = process.cwd();
+  var electrolyteJSON = fs.readJSONSync(workingDir + '/electrolyte.json');
+  var indexHtml = fs.readFileSync(workingDir + '/src/src/index.html').toString();
+  var plugins = '<!--electrolyte:begin-->\n<script type="text/javascript" src="assets/electrolyte/electrolyte.js"></script>\n';
+
+  electrolyteJSON.plugins.forEach(function(bundle) {
+    plugins += '<script type="text/javascript" src="assets/electrolyte/' + bundle + '.js"></script>\n';
+  });
+
+  plugins += '<!--electrolyte:end-->\n\r';
+
+  var contents = indexHtml.replace(re, plugins);
+
+  fs.writeFileSync(workingDir + '/src/src/index.html', contents);
+}
+
 function installPlugin(bundle) {
   var workingDir = process.cwd();
 
@@ -79,6 +98,8 @@ function installPlugin(bundle) {
 
         fs.writeJSONSync(workingDir + '/electrolyte.json', electrolyteJSON);
       }
+
+      updateIndex();
     });
 
 
@@ -115,7 +136,8 @@ switch(myArgs[0]) {
 
       fs.writeJSONSync(workingDir + '/electrolyte.json', blank);
     }
-    
+
+    updateIndex();
   break;
 
   case 'install': // Install a plugin shim
