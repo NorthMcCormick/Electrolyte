@@ -54,7 +54,8 @@ Add these comments after so that Electrolyte knows where to put the scripts, lik
 ### Plugins
 
 [Device (cordova-plugin-device)](plugins/cordova-plugin-device/readme.md)
-[Device (cordova-plugin-app-version)](plugins/cordova-plugin-app-version/readme.md)
+
+[App Version (cordova-plugin-app-version)](plugins/cordova-plugin-app-version/readme.md)
 
 ### CLI
 
