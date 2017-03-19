@@ -46,6 +46,20 @@ Here's what is coming up
 [Device (cordova-plugin-device)](plugins/cordova-plugin-device/readme.md)
 [Device (cordova-plugin-app-version)](plugins/cordova-plugin-app-version/readme.md)
 
+### CLI
+
+#### electrolyte install
+
+This will install all the plugins listed in the `electrolyte.json`. Great for restoring the shims after a fresh clone or copy.
+
+#### electrolyte install <plugin-bundle-name>
+
+This will install a plugin and update your `electrolyte.json`. If a plugin doesn't have a shim yet the call will fail with the information. Note: github urls are not yet supported.
+
+#### electrolyte list
+
+This will give you a list of available plugin shims to install.
+
 ### With Ionic Native
 
 The end goal with these shims is to allow any ionic app to be easily ported over for desktop use with minimal code changes. Obviously not all plugins can be ported but the hope is things like notifications, device info, geolocation, etc, can be used without any code modification on the desktop side. 
