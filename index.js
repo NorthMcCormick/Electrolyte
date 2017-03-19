@@ -59,18 +59,18 @@ switch(myArgs[0]) {
           var shimSourcePath = __dirname + '/plugins/' + pluginDetails.bundle + '/'  + pluginDetails.bundle + '.js';
 
           if(!fs.existsSync(workingDir + '/src/src/assets/electrolyte/')) {
+            console.log('No electrolyte directory, creating now');
             fs.mkdirSync(workingDir + '/src/src/assets/electrolyte/');
           }
 
           if(!fs.existsSync(electrolytePath)) {
+            console.log('Electrolyte device-ready shim not present, creating now');
             fs.copySync(electrolyteSourcePath, electrolytePath);
           }
 
           if(fs.existsSync(shimPath)) {
             fs.removeSync(shimPath);
           }
-
-
 
           fs.copySync(shimSourcePath, shimPath);
         });
