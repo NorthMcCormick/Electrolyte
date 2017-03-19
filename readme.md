@@ -29,6 +29,7 @@ Here's what is coming up
 ### Plugins
 
 [Device (cordova-plugin-device)](plugins/cordova-plugin-device/readme.md)
+[Device (cordova-plugin-app-version)](plugins/cordova-plugin-app-version/readme.md)
 
 ### With Ionic Native
 
