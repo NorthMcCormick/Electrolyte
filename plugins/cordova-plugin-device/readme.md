@@ -1,3 +1,5 @@
+[< Back To Readme](../../readme.md)
+
 # Device (cordova-plugin-device)
 
 ### Installation
