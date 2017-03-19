@@ -1,3 +1,5 @@
+[< Back To Readme](readme.md)
+
 # App Version (cordova-plugin-app-version)
 
 ### Installation
