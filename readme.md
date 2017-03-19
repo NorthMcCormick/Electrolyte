@@ -32,13 +32,14 @@ Here's what is coming up
 2. Make sure you are in the root of your Polyonic project. Initialize Electrolyte with `electrolyte init`
 3. Update your index.html so that Electrolyte can automatically include the scripts for you:
 
-*On Load*
+**On Load**
 
 Update the cordova.js tag to look like this:
 
 ```html
 <script src="cordova.js" onload="javascript:window.isCordovaApp = true;"></script>
 ```
+**Script Comments**
 
 Add these comments after so that Electrolyte knows where to put the scripts, like so:
 
