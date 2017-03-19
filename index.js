@@ -39,7 +39,7 @@ switch(myArgs[0]) {
 
   case 'init': // Create your electrolyte.json and copy some other stuff over
     console.log('Initializing your project');
-    
+
     var workingDir = process.cwd();
 
     var electrolytePath = workingDir + '/src/src/assets/electrolyte/electrolyte.js';
@@ -75,10 +75,15 @@ switch(myArgs[0]) {
     if(myArgs[1] !== undefined) {
       console.log('Installing plugin shim for ' + myArgs[1]);
 
+      var workingDir = process.cwd();
+
+      if(!fs.existsSync(workingDir + '/electrolyte.json')) {
+        console.log('Missing electrolyte.json. Run `electrolyte init` before installing plugins');
+        return;
+      }
+
       if(fs.existsSync(__dirname + '/plugins/' + myArgs[1] + '/plugin.json')) {
         var pluginDetails = fs.readJsonSync(__dirname + '/plugins/' + myArgs[1] + '/plugin.json');
-
-        var workingDir = process.cwd();
 
         installDeps(pluginDetails.dependencies).then(function() {
           console.log('Dependencies installed! Copying other files...');
@@ -103,6 +108,21 @@ switch(myArgs[0]) {
           }
 
           fs.copySync(shimSourcePath, shimPath);
+
+          var electrolyteJSON = fs.readJSONSync(workingDir + '/electrolyte.json');
+          
+          var exists = false;
+          electrolyteJSON.plugins.forEach(function(plugin) {
+            if(pluginDetails.bundle === plugin) {
+              exists = true;
+            }
+          });
+
+          if(!exists) {
+            electrolyteJSON.plugins.push(pluginDetails.bundle);
+
+            fs.writeJSONSync(workingDir + '/electrolyte.json', electrolyteJSON);
+          }
         });
 
 
