@@ -35,6 +35,58 @@ function installDeps(deps) {
   });
 }
 
+function installPlugin(bundle) {
+  var workingDir = process.cwd();
+
+  if(fs.existsSync(__dirname + '/plugins/' + bundle + '/plugin.json')) {
+    var pluginDetails = fs.readJsonSync(__dirname + '/plugins/' + bundle + '/plugin.json');
+
+    installDeps(pluginDetails.dependencies).then(function() {
+      console.log('Dependencies installed! Copying other files...');
+
+      var electrolytePath = workingDir + '/src/src/assets/electrolyte/electrolyte.js';
+      var electrolyteSourcePath = __dirname + '/templates/electrolyte.js';
+      var shimPath = workingDir + '/src/src/assets/electrolyte/' + pluginDetails.bundle + '.js';
+      var shimSourcePath = __dirname + '/plugins/' + pluginDetails.bundle + '/'  + pluginDetails.bundle + '.js';
+
+      if(!fs.existsSync(workingDir + '/src/src/assets/electrolyte/')) {
+        console.log('No electrolyte directory, creating now');
+        fs.mkdirSync(workingDir + '/src/src/assets/electrolyte/');
+      }
+
+      if(!fs.existsSync(electrolytePath)) {
+        console.log('Electrolyte device-ready shim not present, creating now');
+        fs.copySync(electrolyteSourcePath, electrolytePath);
+      }
+
+      if(fs.existsSync(shimPath)) {
+        fs.removeSync(shimPath);
+      }
+
+      fs.copySync(shimSourcePath, shimPath);
+
+      var electrolyteJSON = fs.readJSONSync(workingDir + '/electrolyte.json');
+      
+      var exists = false;
+      electrolyteJSON.plugins.forEach(function(plugin) {
+        if(pluginDetails.bundle === plugin) {
+          exists = true;
+        }
+      });
+
+      if(!exists) {
+        electrolyteJSON.plugins.push(pluginDetails.bundle);
+
+        fs.writeJSONSync(workingDir + '/electrolyte.json', electrolyteJSON);
+      }
+    });
+
+
+  }else{
+    console.log('No shims available for the plugin "' + myArgs[1] + '". Consider requesting a shim in the repo.');
+  }
+}
+
 switch(myArgs[0]) {
 
   case 'init': // Create your electrolyte.json and copy some other stuff over
@@ -72,66 +124,26 @@ switch(myArgs[0]) {
      * 1 - plugin name
      */
 
-    if(myArgs[1] !== undefined) {
-      console.log('Installing plugin shim for ' + myArgs[1]);
+    console.log('Installing plugin shim for ' + myArgs[1]);
 
-      var workingDir = process.cwd();
+    var workingDir = process.cwd();
 
-      if(!fs.existsSync(workingDir + '/electrolyte.json')) {
-        console.log('Missing electrolyte.json. Run `electrolyte init` before installing plugins');
-        return;
-      }
+    if(!fs.existsSync(workingDir + '/electrolyte.json')) {
+      console.log('Missing electrolyte.json. Run `electrolyte init` before installing plugins');
+      return;
+    }
 
-      if(fs.existsSync(__dirname + '/plugins/' + myArgs[1] + '/plugin.json')) {
-        var pluginDetails = fs.readJsonSync(__dirname + '/plugins/' + myArgs[1] + '/plugin.json');
+    if(myArgs[1] === undefined) {
+      console.log('Installing all plugins in electrolyte.json');
 
-        installDeps(pluginDetails.dependencies).then(function() {
-          console.log('Dependencies installed! Copying other files...');
+      var electrolyteJSON = fs.readJsonSync(workingDir + '/electrolyte.json');
 
-          var electrolytePath = workingDir + '/src/src/assets/electrolyte/electrolyte.js';
-          var electrolyteSourcePath = __dirname + '/templates/electrolyte.js';
-          var shimPath = workingDir + '/src/src/assets/electrolyte/' + pluginDetails.bundle + '.js';
-          var shimSourcePath = __dirname + '/plugins/' + pluginDetails.bundle + '/'  + pluginDetails.bundle + '.js';
-
-          if(!fs.existsSync(workingDir + '/src/src/assets/electrolyte/')) {
-            console.log('No electrolyte directory, creating now');
-            fs.mkdirSync(workingDir + '/src/src/assets/electrolyte/');
-          }
-
-          if(!fs.existsSync(electrolytePath)) {
-            console.log('Electrolyte device-ready shim not present, creating now');
-            fs.copySync(electrolyteSourcePath, electrolytePath);
-          }
-
-          if(fs.existsSync(shimPath)) {
-            fs.removeSync(shimPath);
-          }
-
-          fs.copySync(shimSourcePath, shimPath);
-
-          var electrolyteJSON = fs.readJSONSync(workingDir + '/electrolyte.json');
-          
-          var exists = false;
-          electrolyteJSON.plugins.forEach(function(plugin) {
-            if(pluginDetails.bundle === plugin) {
-              exists = true;
-            }
-          });
-
-          if(!exists) {
-            electrolyteJSON.plugins.push(pluginDetails.bundle);
-
-            fs.writeJSONSync(workingDir + '/electrolyte.json', electrolyteJSON);
-          }
-        });
-
-
-      }else{
-        console.log('No shims available for the plugin "' + myArgs[1] + '". Consider requesting a shim in the repo.');
-      }
+      electrolyteJSON.plugins.forEach(function(plugin) {
+        installPlugin(plugin);
+      });
 
     }else{
-      invalidArguments();
+      installPlugin(myArgs[1]);
     }
   break;
 
