@@ -17,24 +17,23 @@ Electrolyte's focus is to bridge the gap between Cordova and Electron. Plugin sh
 Here's what is coming up
 
 - Continue adding more plugins
-- Create a CLI that will automatically install dependencies and update the scripts
-- Minifications
+- Minification/Complex plugins
 - Create-your-own-bundle tool
 
 ### How to use (Manual)
 
-1. Clone or `npm install --save-dev electrolyte` so you can access the shims. 
+1. Clone or `npm install --save-dev electrolyte-plugins` so you can access the shims. 
 2. Follow the installation instructions for each supported plugin. Some plugins require additional node modules to be installed or require additional configuration steps.
 
 ### How to use (Automated, but in beta)
 
-1. Install electrolyte globally `npm install -g electrolyte`
+1. Install electrolyte globally `npm install -g electrolyte-plugins`
 2. Make sure you are in the root of your Polyonic project. Initialize Electrolyte with `electrolyte init`
 3. Update your index.html so that Electrolyte can automatically include the scripts for you:
 
 **On Load**
 
-Update the cordova.js tag to look like this:
+Update the cordova.js script tag to look like this:
 
 ```html
 <script src="cordova.js" onload="javascript:window.isCordovaApp = true;"></script>

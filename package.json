@@ -1,5 +1,5 @@
 {
-  "name": "electrolyte",
+  "name": "electrolyte-plugins",
   "version": "0.0.1",
   "description": "A simple cli to help install Electron-cordova plugin shims",
   "main": "index.js",
