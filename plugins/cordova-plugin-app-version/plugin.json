@@ -1,5 +1,5 @@
 {
   "name": "App Version",
   "bundle": "cordova-plugin-app-version",
-  "dependencies": []
+  "dependencies": ["fs-extra", "xml2js"]
 }
