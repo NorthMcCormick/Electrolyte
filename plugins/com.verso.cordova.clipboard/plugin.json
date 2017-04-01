@@ -1,0 +1,5 @@
+{
+  "name": "Clipboard",
+  "bundle": "com.verso.cordova.clipboard",
+  "dependencies": []
+}

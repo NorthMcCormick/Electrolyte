@@ -56,6 +56,8 @@ Add these comments after so that Electrolyte knows where to put the scripts, lik
 
 [App Version (cordova-plugin-app-version)](plugins/cordova-plugin-app-version/readme.md)
 
+[Clipboard (com.verso.cordova.clipboard)](plugins/com.verso.cordova.clipboard/readme.md)
+
 ### CLI
 
 #### electrolyte install
