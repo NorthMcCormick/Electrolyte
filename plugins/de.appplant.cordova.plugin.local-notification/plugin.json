@@ -1,5 +1,5 @@
 {
   "name": "Local Notifications",
   "bundle": "de.appplant.cordova.plugin.local-notification",
-  "dependencies": ["node-schedule", "node-notifier"]
+  "dependencies": ["node-schedule", "node-notifier", "uuid"]
 }
